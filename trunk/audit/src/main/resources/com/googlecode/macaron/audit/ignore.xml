@@ -23,7 +23,7 @@
 <audit 
 	xmlns="http://macaron.googlecode.com/1.0/"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- 	xsi:schemaLocation="http://macaron.googlecode.com/1.0/ http://macaron-policy.googlecode.com/svn/trunk/audit/src/main/resources/com/googlecode/macaron/audit/audit.xsd"
+ 	xsi:schemaLocation="http://macaron.googlecode.com/1.0/ http://macaron.googlecode.com/svn/trunk/audit/src/main/resources/com/googlecode/macaron/audit/audit.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"	
 	ignoreFilenames="^([^_]+_[a-z]{2}(_[A-Z]{2}(_[a-z]{1,3})?)?\.properties)|(.+\.(xsd|dtd|txt))$"
 >

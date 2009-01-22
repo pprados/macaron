@@ -23,7 +23,7 @@
 	xmlns:audit="http://macaron.googlecode.com/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation=
 		"http://www.w3.org/1999/XSL/Transform http://www.w3.org/2007/schema-for-xslt20.xsd
-		 http://macaron.googlecode.com/1.0/ http://macaron-policy.googlecode.com/svn/trunk/audit/src/main/resources/com/googlecode/macaron/audit/audit.xsd"
+		 http://macaron.googlecode.com/1.0/ http://macaron.googlecode.com/svn/trunk/audit/src/main/resources/com/googlecode/macaron/audit/audit.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns="http://www.w3.org/1999/xhtml"
 >
