@@ -91,7 +91,7 @@
 	<element name="basenames">
 		<complexType>
 			<sequence>
-				<element ref="tns:basename" maxOccurs="unbounded" />
+				<element ref="tns:basename" minOccurs="0" maxOccurs="unbounded" />
 			</sequence>
 		</complexType>
 	</element>
