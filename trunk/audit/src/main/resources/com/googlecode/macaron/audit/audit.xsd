@@ -52,7 +52,7 @@
 	<element name="filenames">
 		<complexType>
 			<sequence>
-				<element ref="tns:filename" maxOccurs="unbounded" />
+				<element ref="tns:filename" minOccurs="0" maxOccurs="unbounded" />
 			</sequence>
 		</complexType>
 	</element>
