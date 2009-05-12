@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet href="audit-to-xhtml.xslt" type="text/xsl"?>
+<audit 
+	xmlns="http://macaron.googlecode.com/1.0/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://macaron.googlecode.com/1.0/ http://macaron.googlecode.com/svn/trunk/audit/src/main/resources/com/googlecode/macaron/audit/audit.xsd"
+	ignoreFilenames="^([^_]+_[a-z]{2}(_[A-Z]{2}(_[a-z]{1,3})?)?\.properties)|(.+\.(xsd|dtd|txt))$"
+>
+
+	<!-- Same package from differents jar. -->
+	<packages/>
+
+	<!-- Same name with differents package. -->
+	<filenames>
+		<filename name="aop.xml">
+			<context>spring-aspects.jar!META-INF/</context>
+			<context>petclinic.jar!META-INF/</context>
+			<context>backdoor-1.0.jar!META-INF/</context>
+		</filename>
+	</filenames>
+
+	<!-- Same basename with differents extensions in same package. -->
+	<basenames>
+		<basename name="messages">
+			<context>backdoor-1.0.jar</context>
+			<context>petclinic-with-backdoor.war</context>
+		</basename>
+	</basenames>
+
+	<!-- Services in jar. -->
+	<services>
+		<service name="META-INF/services/javax.xml.parsers.SAXParserFactory">
+			<context>backdoor-1.0.jar</context>
+		</service>
+		<service name="META-INF/services/javax.xml.parsers.DocumentBuilderFactory">
+			<context>backdoor-1.0.jar</context>
+		</service>
+	</services>
+</audit>
