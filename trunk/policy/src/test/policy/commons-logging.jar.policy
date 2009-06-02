@@ -1,0 +1,20 @@
+// commons-logging.jar
+grant {
+	permission java.lang.RuntimePermission "getClassLoader" ;
+	permission java.security.SecurityPermission "getPolicy" ;
+	permission java.util.PropertyPermission "log4j.configDebug","read" ;
+	permission java.util.PropertyPermission "log4j.configuration","read" ;
+	permission java.util.PropertyPermission "log4j.configuratorClass","read" ;
+	permission java.util.PropertyPermission "log4j.debug","read" ;
+	permission java.util.PropertyPermission "log4j.defaultInitOverride","read" ;
+	permission java.util.PropertyPermission "log4j.ignoreTCL","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.Log","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.Log.allowFlawedContext","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.Log.allowFlawedDiscovery","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.Log.allowFlawedHierarchy","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.LogFactory","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.LogFactory.HashtableImpl","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.diagnostics.dest","read" ;
+	permission java.util.PropertyPermission "org.apache.commons.logging.log","read" ;
+	permission java.util.PropertyPermission "petclinic.root","read" ;
+};

@@ -1,0 +1,7 @@
+// cglib-nodep-2.1_3.jar
+grant {
+	permission java.lang.RuntimePermission "accessDeclaredMembers" ;
+	permission java.lang.RuntimePermission "getProtectionDomain" ;
+	permission java.lang.reflect.ReflectPermission "suppressAccessChecks" ;
+	permission java.util.PropertyPermission "cglib.debugLocation","read" ;
+};

@@ -1,0 +1,10 @@
+// petclinic.jar
+grant {
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.dbcp" ;
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.pool" ;
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.pool.impl" ;
+	permission java.net.SocketPermission "*","resolve" ;
+	permission java.util.PropertyPermission "hsqldb.max_char_or_varchar_display_size","read" ;
+	permission java.util.PropertyPermission "hsqldb.trace","read" ;
+	permission java.util.PropertyPermission "hsqldb.tracesystemout","read" ;
+};

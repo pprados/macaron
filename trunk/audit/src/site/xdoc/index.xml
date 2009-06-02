@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- 
+ * Copyright 2009 Philippe Prados.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+-->
+
+<document>
+
+	<properties>
+		<title>Audit JavaEE component to detect suspicious files.</title>
+		<author
+			email="macaron@philippe.prados.name">
+			Philippe PRADOS
+		</author>
+	</properties>
+
+
+	<body>
+		<section name="Introduction">
+			<p>
+				Audit JavaEE component and detect suspicious files.
+				<ul>
+					<li>Same package in different jar files</li>
+					<li>Same filename in different packages</li>
+					<li>Same base filename in same package</li>
+					<li>META-INF/services</li>
+					<li>Specific annotations</li>
+				</ul>
+			</p>
+		</section>
+	</body>
+
+</document>
+

@@ -1,0 +1,8 @@
+// commons-dbcp.jar
+grant {
+	permission java.net.SocketPermission "127.0.0.1:9001","connect,resolve" ;
+	permission java.net.SocketPermission "localhost","resolve" ;
+	permission java.util.PropertyPermission "hsqldb.max_char_or_varchar_display_size","read" ;
+	permission java.util.PropertyPermission "hsqldb.trace","read" ;
+	permission java.util.PropertyPermission "hsqldb.tracesystemout","read" ;
+};
