@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- 
-	* Copyright 2008 Philippe Prados.
+	* Copyright 2009 Philippe Prados.
 	*
 	* Licensed under the Apache License, Version 2.0 (the "License");
 	* you may not use this file except in compliance with the License.
@@ -26,6 +26,11 @@
  	xsi:schemaLocation="http://macaron.googlecode.com/1.0/ http://macaron.googlecode.com/svn/trunk/audit/src/main/resources/com/googlecode/macaron/audit/audit.xsd"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"	
 	ignoreFilenames="^([^_]+_[a-z]{2}(_[A-Z]{2}(_[a-z]{1,3})?)?\.properties)|(.+\.(xsd|dtd|txt))$"
+	annotations="
+		@javax.servlet.annotation.WebServlet,
+		@javax.servlet.annotation.ServletContextListener,
+		@javax.servlet.annotation.ServletFilter,
+		@javax.servlet.annotation.WebServlet"
 >
 	<!-- Meme package, archives différentes -->
 	<packages>
@@ -49,10 +54,12 @@
 		<filename name="pom.xml"/>
 		<filename name="pom.properties"/>
 	</filenames>
+	
 	<!-- Même basename, même package -->
 	<basenames>
 		<basename name="META-INF/NOTICE"/>
 		<basename name="META-INF/LICENSE"/>
 	</basenames>
+
 </audit>
 

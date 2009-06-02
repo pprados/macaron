@@ -1,0 +1,72 @@
+#!/bin/bash
+#
+# Copyright 2009 Philippe Prados.
+# http://macaron.googlecode.com
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+cygwin=false
+case "`uname`" in
+CYGWIN*) cygwin=true;;
+esac
+
+# For Cygwin, ensure paths are in UNIX format before anything is touched
+if $cygwin; then
+  [ -n "$JAVA_HOME" ] && JAVA_HOME=`cygpath --unix "$JAVA_HOME"`
+  [ -n "$JAVA_OPT" ] && JAVA_OPT=`cygpath --unix "$JAVA_OPT"`
+fi
+
+# resolve links - $0 may be a softlink
+PRG="$0"
+if ! $cygwin; then
+  while [ -h "$PRG" ]; do
+    ls=`ls -ld "$PRG"`
+    link=`expr "$ls" : '.*-> \(.*\)$'`
+    if expr "$link" : '/.*' > /dev/null; then
+      PRG="$link"
+    else
+      PRG=`dirname "$PRG"`/"$link"
+    fi
+  done
+fi
+PRGDIR=`dirname "$PRG"`
+
+# Get standard environment variables
+
+[ -n "$MACARON_HOME" ] || MACARON_HOME=`cd "$PRGDIR/.." ; pwd`
+
+# Init JAVA_RUN
+if [ -z "$JAVA_HOME" ]; then
+	JAVA_RUN=`which java`
+	if [ -z "$JAVA_RUN" ]; then
+        echo "The JAVA_HOME environment variable is not defined"
+        echo "This environment variable is needed to run this program"
+        exit 1
+    fi
+else
+	JAVA_RUN=$JAVA_HOME/bin/java
+fi
+
+# For Cygwin, switch paths to Windows format before running java
+if $cygwin; then
+  [ -n "$MACARON_HOME" ] && MACARON_HOME=`cygpath --path --windows "$MACARON_HOME"`
+fi
+
+#echo "---------"
+#echo JAVA_HOME=$JAVA_HOME
+#echo JAVA_OPTS=$JAVA_OPTS
+#echo MACARON_HOME=$MACARON_HOME
+#echo "---------"
+
+exec "$JAVA_RUN" $JAVA_OPTS -jar "$MACARON_HOME"/lib/audit-*.jar "$@"

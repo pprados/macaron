@@ -1,0 +1,13 @@
+// aspectjweaver.jar
+grant {
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.dbcp" ;
+	permission java.lang.RuntimePermission "accessDeclaredMembers" ;
+	permission java.lang.RuntimePermission "createClassLoader" ;
+	permission java.security.SecurityPermission "getPolicy" ;
+	permission java.util.PropertyPermission "JavaClass.debug","read" ;
+	permission java.util.PropertyPermission "org.aspectj.dump.directory","read" ;
+	permission java.util.PropertyPermission "org.aspectj.tracing.debug","read" ;
+	permission java.util.PropertyPermission "org.aspectj.tracing.factory","read" ;
+	permission java.util.PropertyPermission "org.aspectj.weaver.Dump.condition","read" ;
+	permission java.util.PropertyPermission "org.aspectj.weaver.Dump.exception","read" ;
+};

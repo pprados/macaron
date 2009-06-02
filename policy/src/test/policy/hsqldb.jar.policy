@@ -1,0 +1,7 @@
+// hsqldb.jar
+grant {
+	permission java.net.SocketPermission "*","connect,resolve" ;
+	permission java.util.PropertyPermission "hsqldb.max_char_or_varchar_display_size","read" ;
+	permission java.util.PropertyPermission "hsqldb.trace","read" ;
+	permission java.util.PropertyPermission "hsqldb.tracesystemout","read" ;
+};

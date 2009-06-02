@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- 
-	* Copyright 2008 Philippe Prados.
+	* Copyright 2009 Philippe Prados.
 	*
 	* Licensed under the Apache License, Version 2.0 (the "License");
 	* you may not use this file except in compliance with the License.
@@ -198,7 +198,7 @@
 	<script type="text/javascript"><![CDATA[
 var macaron=
 {
-	menus:["Components","SealedPackages","Packages","Filenames","Basenames","Services"],
+	menus:["Components","SealedPackages","Packages","Filenames","Basenames","Services","Annotations"],
 	selectMenu:function(id)
 	{
 		for (var i=0;i != this.menus.length;++i)
@@ -294,6 +294,7 @@ document.onclick=function(event)
 <td class="menu" id="menuFilenames">Filenames</td>
 <td class="menu" id="menuBasenames">Basenames</td>
 <td class="menu" id="menuServices">Services</td>
+<td class="menu" id="menuAnnotations">Annotations</td>
 <td class="cmd" width="100%"><a href="javascript:window.print()">Print</a></td>
 <td class="cmd" ><a href="http://macaron.googlecode.com">Help</a></td>
 </tr>
@@ -419,6 +420,25 @@ or a backdoor java class used to substitute a property or others files.
 </table>
 </div>
 
+<div id="Annotations" class="view-closed">
+<h1 class="header">Annotations.</h1>
+<p class="comment">Suspicious annotations. Could be: injected code and backdoor. 
+</p>
+<xsl:if test="count(//audit:annotation) = 0">
+<p class="item">Good news! No annotations detected.</p>
+</xsl:if>
+<table>
+<tbody>
+<xsl:for-each select="//audit:annotation">
+	<xsl:sort order="ascending" select="@name"/>
+	<xsl:call-template name="audit">
+		<xsl:with-param name="node" select="."/>
+	</xsl:call-template>
+</xsl:for-each>
+</tbody>
+</table>
+</div>
+
 </body>
 </html>
 </xsl:template>
@@ -452,6 +472,7 @@ or a backdoor java class used to substitute a property or others files.
 						<xsl:variable name="filenames" select="//audit:filename/audit:context[text() = $current]"/>
 						<xsl:variable name="basenames" select="//audit:basename/audit:context[text() = $current]"/>
 						<xsl:variable name="services" select="//audit:service/audit:context[text() = $current]"/>
+						<xsl:variable name="annotations" select="//audit:annotation/audit:context[text() = $current]"/>
 						
 						<xsl:if test="count($packages) &gt; 0">
 							Shared packages:<br/>
@@ -477,6 +498,13 @@ or a backdoor java class used to substitute a property or others files.
 						<xsl:if test="count($services) &gt; 0">
 							Published services:<br/>
 							<xsl:for-each select="$services">
+								<span class="view"><a href="#{../@name}"><xsl:value-of select="../@name"/></a><br/></span>
+							</xsl:for-each>
+						</xsl:if>
+
+						<xsl:if test="count($annotations) &gt; 0">
+							Annotations:<br/>
+							<xsl:for-each select="$annotations">
 								<span class="view"><a href="#{../@name}"><xsl:value-of select="../@name"/></a><br/></span>
 							</xsl:for-each>
 						</xsl:if>

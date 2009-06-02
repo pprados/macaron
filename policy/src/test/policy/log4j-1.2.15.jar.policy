@@ -1,0 +1,11 @@
+// log4j-1.2.15.jar
+grant {
+	permission java.security.SecurityPermission "getPolicy" ;
+	permission java.util.PropertyPermission "log4j.configDebug","read" ;
+	permission java.util.PropertyPermission "log4j.configuration","read" ;
+	permission java.util.PropertyPermission "log4j.configuratorClass","read" ;
+	permission java.util.PropertyPermission "log4j.debug","read" ;
+	permission java.util.PropertyPermission "log4j.defaultInitOverride","read" ;
+	permission java.util.PropertyPermission "log4j.ignoreTCL","read" ;
+	permission java.util.PropertyPermission "petclinic.root","read" ;
+};

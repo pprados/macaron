@@ -1,0 +1,19 @@
+// spring-webmvc.jar
+grant {
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.dbcp" ;
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.pool" ;
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.pool.impl" ;
+	permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.dbcp.pool.impl" ;
+	permission java.lang.RuntimePermission "accessClassInPackage.sun.beans.editors" ;
+	permission java.lang.RuntimePermission "accessDeclaredMembers" ;
+	permission java.lang.RuntimePermission "defineClassInPackage.java.lang" ;
+	permission java.lang.RuntimePermission "getClassLoader" ;
+	permission java.lang.reflect.ReflectPermission "suppressAccessChecks" ;
+	permission java.net.SocketPermission "*","connect,resolve" ;
+	permission java.util.PropertyPermission "elementAttributeLimit","read" ;
+	permission java.util.PropertyPermission "entityExpansionLimit","read" ;
+	permission java.util.PropertyPermission "hsqldb.max_char_or_varchar_display_size","read" ;
+	permission java.util.PropertyPermission "hsqldb.trace","read" ;
+	permission java.util.PropertyPermission "hsqldb.tracesystemout","read" ;
+	permission java.util.PropertyPermission "maxOccurLimit","read" ;
+};
