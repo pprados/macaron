@@ -7,4 +7,4 @@ http://macaron.googlecode.com/svn/trunk/images/jmx.png
 Use `cd` and `ls` to navigate and list the JMX components.
 Use `prop=value` or `method(...)` to update the current component.
 
-[history-agent] [jndi-agent] [jmx-agent] [jdbc-agent] [java-agent] [shell-agent]
+[historyAgent history-agent] [jndiAgent jndi-agent] [jmxAgent jmx-agent] [jdbcAgent jdbc-agent] [javaAgent java-agent] [shellAgent shell-agent]

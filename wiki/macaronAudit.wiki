@@ -26,4 +26,4 @@ Audit JavaEE component and jar to detect suspicious files.
 The environment variable AUDIT_XSLT may be the default XSLT.
 }}}
 
-[macaron-policy] [macaron-seal]
+[macaronPolicy macaron-policy] [macaronSeal macaron-seal]

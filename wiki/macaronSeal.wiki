@@ -24,7 +24,7 @@ Usage: macaron-seal [-i] [-k] [-s] [-R] [-a] [-l <int>] \
 Add "Sealed: true" attribute in each META-INF/MANIFEST.MF in jar or inner jar.
 
 }}}
-It's possible to combine [macaron-seal] with [macaron-audit] to seal only the package not shared
+It's possible to combine [macaronSeal macaron-seal] with [macaronAudit macaron-audit] to seal only the package not shared
 in different components.
 For example, to have a harderned Tomcat, use
 {{{
@@ -32,4 +32,4 @@ macaron-audit ‑‑output ‑ ‑R $CATALINA_HOME | \
  macaron-seal  ‑‑ignore ‑ ‑R $CATALINA_HOME ‑‑in‑place
 }}}
 
-[macaron-audit] [macaron-policy]
+[macaronAudit macaron-audit] [macaronPolicy macaron-policy]

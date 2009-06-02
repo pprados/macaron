@@ -1,0 +1,15 @@
+#summary Macaron Back Door
+#labels Macaron Back Door
+
+= Macaron Java back door =
+
+The back door can detect the environment and use different techniques
+to inject a hook in the HTTP request work flow. Then, with the presence of
+the key `M4c4r0n` in any field, an agent is presented.
+
+ * [historyAgent History]: Memorize last 20 requests
+ * [jndiAgent JNDI]: Consult JNDI
+ * [jmxAgent JMX]: Consult and invoke JMX
+ * [jdcAgent JDBC]: Invoke database
+ * [javaAgent Java/Javascript]: Compile and execute code in the JavaEE server
+ * [shellAgent Shell]: Invoke a shell

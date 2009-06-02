@@ -54,4 +54,4 @@ The environment variable POLICY_DATABASE can be set to the default database
 URL. The database can be initialized with -x '' -o dir.
 }}}
 
-[macaron-audit] [macaron-seal]
+[macaronAudit macaron-audit] [macaronSeal macaron-seal]

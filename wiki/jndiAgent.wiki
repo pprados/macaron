@@ -6,4 +6,4 @@ http://macaron.googlecode.com/svn/trunk/images/jndi.png
 
 Use `cd` and `ls` to navigate and list the JNDI components.
 
-[history-agent] [jndi-agent] [jmx-agent] [jdbc-agent] [java-agent] [shell-agent]
+[historyAgent history-agent] [jndiAgent jndi-agent] [jmxAgent jmx-agent] [jdbcAgent jdbc-agent] [javaAgent java-agent] [shellAgent shell-agent]
