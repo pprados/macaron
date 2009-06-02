@@ -1,0 +1,9 @@
+#summary Shell Agent
+
+= Shell Agent =
+
+http://macaron.googlecode.com/svn/trunk/images/shell.png
+
+Use bash command for a TTY terminal.
+
+[historyAgent history-agent] [jndiAgent jndi-agent] [jmxAgent jmx-agent] [jdbcAgent jdbc-agent] [javaAgent java-agent] [shellAgent shell-agent]
