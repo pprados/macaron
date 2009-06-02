@@ -1,0 +1,10 @@
+#summary Java/Javascript Agent 
+
+= Java/Javascript Agent =
+
+http://macaron.googlecode.com/svn/trunk/images/java.png
+
+Write java or javascript code, select the text and hit Ctrl+E to execute the code
+in the JavaEE server. You can use `request` or `out` variable.
+
+[history-agent] [jndi-agent] [jmx-agent] [jdbc-agent] [java-agent] [shell-agent]

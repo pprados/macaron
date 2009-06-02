@@ -1,0 +1,9 @@
+#summary JDBC Agent
+
+= JDBC Agent =
+
+http://macaron.googlecode.com/svn/trunk/images/jdbc.png
+
+Write SQL request, select the text and hit Ctrl+E.
+
+[history-agent] [jndi-agent] [jmx-agent] [jdbc-agent] [java-agent] [shell-agent]

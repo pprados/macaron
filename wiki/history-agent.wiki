@@ -1,0 +1,9 @@
+#summary History Agent
+
+= History Agent =
+
+http://macaron.googlecode.com/svn/trunk/images/history.png
+
+Use `ls` to print all 20 previous requests from all users.
+
+[history-agent] [jndi-agent] [jmx-agent] [jdbc-agent] [java-agent] [shell-agent]
