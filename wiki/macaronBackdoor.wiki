@@ -10,6 +10,6 @@ the key `M4c4r0n` in any field, an agent is presented.
  * [historyAgent History]: Memorize last 20 requests
  * [jndiAgent JNDI]: Consult JNDI
  * [jmxAgent JMX]: Consult and invoke JMX
- * [jdcAgent JDBC]: Invoke database
+ * [jdbcAgent JDBC]: Invoke database
  * [javaAgent Java/Javascript]: Compile and execute code in the JavaEE server
  * [shellAgent Shell]: Invoke a shell
