@@ -93,6 +93,19 @@
 			</roles>
 			<timezone>+0100</timezone>
 		</developer>
+		<developer>
+			<id>rpelisse</id>
+			<name>Romain PELISSE</name>
+			<email>belaran@gmail.com</email>
+			<url>http://belaran.eu/</url>
+			<organization>Atos Origin</organization>
+			<organizationUrl>http://www.fr.atosorigin.com/fr-fr/</organizationUrl>
+			<roles>
+				<role>Plugin Helper :) </role>
+			</roles>
+			<timezone>+0100</timezone>
+		</developer>
+
 	</developers>
 
 	<organization>
@@ -101,13 +114,20 @@
 	</organization>
 
 	<build>
-		<plugins>
+      <plugins>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
           <descriptors>
             <descriptor>src/main/assembly/bin.xml</descriptor>
           </descriptors>
+        </configuration>
+      </plugin>
+       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
         </configuration>
       </plugin>
 
@@ -209,7 +229,7 @@
 
 		</plugins>
 	</build>
-
+	
 
 
 	<reporting>
@@ -356,5 +376,14 @@
 
 		<checkstyle.url>http://www.prados.eu/mvn/checkstyle-pprados.xml</checkstyle.url>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant-apache-resolver</artifactId>
+			<version>1.7.1</version>
+		</dependency>	
+	</dependencies>
+
 
 </project>
