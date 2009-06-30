@@ -33,12 +33,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -61,7 +59,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
  * Analyse each files and components and generate an XML rapport with all suspicious files.
@@ -71,9 +68,9 @@ import org.xml.sax.SAXParseException;
 public class Audit
 {
 	/** If debug */
-	private static boolean debug=true;
+	private static boolean debug = true;
 	/** The logger. Use to print steps. */
-	private static Logger log=Logger.getLogger(Audit.class.getName());
+	private static Logger log = Logger.getLogger(Audit.class.getName());
 	static
 	{
 		log.setLevel(Level.SEVERE);
@@ -91,7 +88,7 @@ public class Audit
 	private static final String home="http://macaron.googlecode.com/svn/trunk/audit/src/main/resources/com/googlecode/macaron/audit/";
 	
 	/** Default xslt. */
-	private static final String defaultStylesheet=home+"audit-to-xhtml.xslt";
+	public static final String DEFAULT_STYLE_SHEET = home + "audit-to-xhtml.xslt";
 	/** Default XML Schema. */
 	private static final String defaultXSD=home+"audit.xsd";
 
@@ -155,17 +152,20 @@ public class Audit
 	/** Contexts with annotations. */
 	private HashMap<String,Set<Context>> annotations_=new LinkedHashMap<String,Set<Context>>();
 	
-
+	/**
+		FIXME: should use directly ConfigParams ...
+	*/
 	/** Use recursive analyse with directory ? */
-	private final boolean recurs_;
+	private boolean recurs_;
 	/** XSLT to inject in the result. */
-	private final String xslt_;
+	private String xslt_;
 	/** XSLT output dir. */
-	private final String dir_;
+	private String dir_;
 	/** Writer for the report. */
-	private final PrintWriter out_;
+	private PrintWriter out_;
 	/** Filename to exclude. */
 	private Pattern excludePattern;
+	private ParamsConfig config;
 
 	/**
 	 * Constructor.
@@ -177,7 +177,7 @@ public class Audit
 	 * @throws IOException If IO error.
 	 * @throws SAXException If error when parse xml file.
 	 */
-	public Audit(File output,String xslt,URL ignore,boolean recurs) throws IOException, SAXException
+	private void setup(File output,String xslt,URL ignore,boolean recurs) throws IOException, SAXException
 	{
 		try
 		{
@@ -209,10 +209,15 @@ public class Audit
 	 * @throws IOException If IO error.
 	 * @throws SAXException If error when parse xml file.
 	 */
-	public Audit(ParamsConfig config) throws IOException, SAXException
+	public Audit(ParamsConfig config)
 	{
-		this(config.output,config.xslt,config.ignore,config.recurs);
+		this.config = config;
 	}
+
+	public void init() throws IOException, SAXException {
+		this.setup(config.getOutput(),config.getXslt(),config.getIgnore(),config.isRecurs());
+	}
+	
 
 	/**
 	 * Exception when command line error.
@@ -545,7 +550,10 @@ public class Audit
 	 * @param names All files.
 	 * @throws IOException If error.
 	 */
-	private void doAll(File[] names) throws IOException
+	//FIXME: won't a List<File> be more elegant ? 
+	//       or even List<String> filenames; which ask less work 
+	//		 for user API
+	public void doAll(File[] names) throws IOException
 	{
 		if (names==null) return;
 		for (File name:names)
@@ -643,7 +651,7 @@ public class Audit
 			{
 				u=new File(xslt_).getCanonicalFile().toURI().toURL();
 			}
-			if (u.toExternalForm().equals(defaultStylesheet))
+			if (u.toExternalForm().equals(DEFAULT_STYLE_SHEET ))
 			{
 				u=getClass().getResource("audit-to-xhtml.xslt");
 			}
@@ -989,19 +997,6 @@ public class Audit
 	private static final int ASK_HELP = -2;
 
 	/**
-	 * All parameters.
-	 */
-	private static class ParamsConfig
-	{
-		boolean recurs=false;
-		URL ignore;
-		List<File> names=new ArrayList<File>();
-		File output=new File("-");
-		final String envXslt=System.getenv("AUDIT_XSLT");
-		String xslt=(envXslt!=null) ? envXslt :	defaultStylesheet;
-	}	
-
-	/**
 	 * Parse arguments.
 	 * 
 	 * @param params The configuration.
@@ -1017,22 +1012,22 @@ public class Audit
 		final String arg = args[position];
 		if ("-r".equals(arg) || "-R".equals(arg) || "--recursive".equals(arg))
 		{
-			params.recurs=(params.recurs==false);
+			params.setRecurs(params.isRecurs() == false);
 		}
 		else if (("-i".equals(arg) || "--ignore".equals(arg)) && position < args.length - 1)
 		{
 			String ignore=args[++position];
 			try
 			{
-				params.ignore=new URL(ignore);
+				params.setIgnore(new URL(ignore));
 			}
 			catch (MalformedURLException x)
 			{
 				final int idx = ignore.indexOf('#');
 				try
 				{
-					params.ignore = new File((idx != -1) ? ignore.substring(
-						0, idx) : ignore).toURI().toURL();
+					params.setIgnore( new File((idx != -1) ? ignore.substring(
+						0, idx) : ignore).toURI().toURL());
 				}
 				catch (MalformedURLException e)
 				{
@@ -1043,11 +1038,11 @@ public class Audit
 		}
 		else if (("-o".equals(arg) || "--output".equals(arg)) && position < args.length - 1)
 		{
-			params.output=new File(args[++position]);
+			params.setOutput(new File(args[++position]));
 		}
 		else if ("--xslt".equals(arg) && position < args.length - 1)
 		{
-			params.xslt=args[++position];
+			params.setXslt(args[++position]);
 		}
 		else if (("-l".equals(arg) || "--loglevel".equals(arg)) && position < args.length - 1)
 		{
@@ -1062,7 +1057,7 @@ public class Audit
 		{
 			if (arg.charAt(0)=='-')
 				return ERROR;
-			params.names.add(new File(arg));
+			params.getNames().add(new File(arg));
 		}
 		return position;
 	}
@@ -1094,7 +1089,7 @@ public class Audit
 				throw new CommandLineException("Unknow parameters " + args[i]);
 			}
 		}
-		if (params.output==null)
+		if ( params.getOutput() == null )
 			throw new CommandLineException("Missing --output parameter.");
 		return params;
 	}
@@ -1112,16 +1107,11 @@ public class Audit
 			ParamsConfig config=parseArgs(args);
 			if (config==null) return 0;
 			Audit audit=new Audit(config);
-			audit.doAll(config.names.toArray(new File[config.names.size()]));
+			audit.doAll(config.getNames().toArray(new File[config.getNames().size()]));
 			audit.writeXMLReport();
 			return 0;
 		}
 		catch (CommandLineException e)
-		{
-			log.severe(e.getLocalizedMessage());
-			return 1;
-		}
-		catch (SAXParseException e)
 		{
 			log.severe(e.getLocalizedMessage());
 			return 1;
