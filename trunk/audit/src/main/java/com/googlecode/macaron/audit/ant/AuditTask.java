@@ -48,6 +48,60 @@ public class AuditTask extends Task {
 		this.config.setXslt(xslt);
 	}
 
+		
+	/**
+	 * <p>Execute AuditTask:
+	 * 	<ol>
+	 * 	<li>Check task attributes and elements provided;</li>
+	 *  <li>Create an Audit instance ;</li>
+	 *  <li>Invoke the doAll method.</li>
+	 *  <ol>
+	 * </p>
+	 */
+	@Override
+	public void execute() {
+		validate();
+		audit = new Audit(config);
+		File[] files = new File[this.config.getNames().size()];
+		int nbFile = 0;
+		for ( File file : this.config.getNames() ) {
+			files[nbFile++] = file;
+		}
+		
+		try {
+			audit.doAll(files);
+		} catch (IOException e) {
+			new BuildException(e);
+		}
+	}
+	
+	public void addTarget(Target target) {
+		if ( this.targets == null )
+			this.targets = new ArrayList<Target>();
+		this.targets.add(target);
+	}
+	
+	private void buildFilesList() {
+		List<File> files = new ArrayList<File>(this.targets.size());
+		for ( Target target : targets ){
+			// Add exist() & readable() test ?
+			files.add(new File(target.getName()));
+		}
+		config.setNames(files);
+	}
+	
+	private void convertIgnoreToURL() {
+		if ( this.ignore != null && ! "".equals(this.ignore)) {
+			try {
+				this.config.setIgnore(new URL(this.ignore));
+			} catch (MalformedURLException e) {
+				throw new BuildException("'ignore' attribute must be a valid URL.");
+			}
+		}
+		
+	}
+
+
 	/**
 	 * @return the ignore
 	 */
@@ -117,46 +171,4 @@ public class AuditTask extends Task {
 	public void setXslt(String xslt) {
 		this.xslt = xslt;
 	}
-
-	private void buildFilesList() {
-		List<File> files = new ArrayList<File>(this.targets.size());
-		for ( Target target : targets ){
-			// Add exist() & readable() test ?
-			files.add(new File(target.getName()));
-		}
-		config.setNames(files);
-	}
-	
-	private void convertIgnoreToURL() {
-		if ( this.ignore != null && ! "".equals(this.ignore)) {
-			try {
-				this.config.setIgnore(new URL(this.ignore));
-			} catch (MalformedURLException e) {
-				throw new BuildException("'ignore' attribute must be a valid URL.");
-			}
-		}
-		
-	}
-	
-	/**
-	 * <p>Execute AuditTask:
-	 * 	<ol>
-	 * 	<li>Check task attributes and elements provided;</li>
-	 *  <li>Create an Audit instance ;</li>
-	 *  <li>Invoke the doAll method.</li>
-	 *  <ol>
-	 * </p>
-	 */
-	@Override
-	public void execute() {
-		validate();
-		audit = new Audit(config);
-		File[] files = null;
-		try {
-			audit.doAll(files);
-		} catch (IOException e) {
-			new BuildException(e);
-		}
-	}
-	
 }
