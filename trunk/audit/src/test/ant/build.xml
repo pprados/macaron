@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<project name="test-audit-task" default="audit" basedir="../../../">
+    <description>Sample Ant file to test proper behavior of AuditTask</description>
+    
+    <property name="src"                 value="src/main/java"/>
+    <property name="target"              value="${basedir}/target"/>
+    <property name="target.classes"      value="${basedir}/target/classes/"/>
+    <property name="target.test.ant"     value="${basedir}/target/ant-test/"/>
+
+    <target name="init">
+        <mkdir dir="${target.test.ant}"/>
+    </target>
+    
+    <target name="audit" depends="init">
+
+        <path id="macaron.classpath">
+            <pathelement location="${target}/audit-1.0.jar" />
+        </path>
+    
+        <taskdef name="audit" classname="com.googlecode.macaron.audit.ant.AuditTask">
+            <classpath refid="macaron.classpath" />
+        </taskdef>
+        
+        <audit output="${target.test.ant}/audit.xml" recursive="false">
+            <target name="${src}"/>
+        </audit>
+        
+    </target>
+</project>
