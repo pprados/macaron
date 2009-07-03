@@ -9,9 +9,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
+import org.xml.sax.SAXException;
 
 import com.googlecode.macaron.audit.Audit;
 import com.googlecode.macaron.audit.ParamsConfig;
@@ -29,18 +32,37 @@ import com.googlecode.macaron.audit.ParamsConfig;
  */
 public class AuditTask extends Task {
 
+	private static final Logger logger = Logger.getLogger("AuditTask");
 	private ParamsConfig config = new ParamsConfig();
 	private Audit audit;
 	
 	private String ignore;
 	private String output;
+	private String logLevel;
+	/**
+	 * @return the logLevel
+	 */
+	public String getLogLevel() {
+		return logLevel;
+	}
+
+
+	/**
+	 * @param logLevel the logLevel to set
+	 */
+	public void setLogLevel(String logLevel) {
+		this.logLevel = logLevel;
+	}
+
 	private List<Target> targets;
+	
 	private boolean recursive;
 	private String xslt;
 	/*
 	 * Validation of task attributes 
 	 */
 	private void validate() {
+		logger.setLevel(Level.FINEST);
 		convertIgnoreToURL();
 		buildFilesList();
 		this.config.setOutput(new File(output));
@@ -60,17 +82,14 @@ public class AuditTask extends Task {
 	 */
 	@Override
 	public void execute() {
-		validate();
-		audit = new Audit(config);
-		File[] files = new File[this.config.getNames().size()];
-		int nbFile = 0;
-		for ( File file : this.config.getNames() ) {
-			files[nbFile++] = file;
-		}
-		
 		try {
-			audit.doAll(files);
+			validate();
+			audit = new Audit(config);
+			audit.init();
+			audit.doAll(this.config.getNames().toArray(new File[this.config.getNames().size()]));
 		} catch (IOException e) {
+			new BuildException(e);
+		} catch (SAXException e) {
 			new BuildException(e);
 		}
 	}
