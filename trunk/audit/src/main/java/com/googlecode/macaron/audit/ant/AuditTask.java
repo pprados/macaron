@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.apache.tools.ant.BuildException;
@@ -62,12 +63,14 @@ public class AuditTask extends Task {
 	 * Validation of task attributes 
 	 */
 	private void validate() {
-		logger.setLevel(Level.FINEST);
 		convertIgnoreToURL();
 		buildFilesList();
 		this.config.setOutput(new File(output));
 		this.config.setRecurs(recursive);
-		this.config.setXslt(xslt);
+		if ( xslt == null || "".equals(xslt) )
+			this.config.setXslt(Audit.DEFAULT_STYLE_SHEET);
+		else
+			this.config.setXslt(xslt);
 	}
 
 		
@@ -83,10 +86,14 @@ public class AuditTask extends Task {
 	@Override
 	public void execute() {
 		try {
+			LogManager.getLogManager().readConfiguration(Audit.class.getResourceAsStream("/META-INF/logging.properties"));
+			if (logLevel != null && "".equalsIgnoreCase(logLevel) ) 
+				logger.setLevel(Level.parse(this.logLevel));
 			validate();
 			audit = new Audit(config);
 			audit.init();
 			audit.doAll(this.config.getNames().toArray(new File[this.config.getNames().size()]));
+			audit.writeXMLReport();
 		} catch (IOException e) {
 			new BuildException(e);
 		} catch (SAXException e) {
