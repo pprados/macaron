@@ -560,7 +560,7 @@ public class Audit
 		{
 			if (name.isDirectory())
 			{
-				final File[] alljar=name.listFiles(new FileFilter()
+				final File[] alljar= name.listFiles(new FileFilter()
 				{
 					public boolean accept(File pathname)
 					{
