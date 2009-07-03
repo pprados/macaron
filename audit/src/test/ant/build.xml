@@ -22,8 +22,8 @@
             <classpath refid="macaron.classpath" />
         </taskdef>
         
-        <audit output="${target.test.ant}/audit.xml" recursive="false">
-            <target name="${src}"/>
+        <audit output="${target.test.ant}/audit.xml" recursive="true">
+            <target name="${target.classes}"/>
         </audit>
         
     </target>
