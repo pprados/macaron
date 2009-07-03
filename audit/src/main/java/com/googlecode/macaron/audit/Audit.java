@@ -20,7 +20,6 @@ package com.googlecode.macaron.audit;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -560,18 +559,7 @@ public class Audit
 		{
 			if (name.isDirectory())
 			{
-				final File[] alljar= name.listFiles(new FileFilter()
-				{
-					public boolean accept(File pathname)
-					{
-						return (pathname.getName().endsWith(".jar")
-								|| pathname.getName().endsWith(".war")
-								|| pathname.getName().endsWith(".ear")
-								|| pathname.getName().endsWith(".rar")
-								|| pathname.getName().endsWith(".class")
-								|| (recurs_ && pathname.isDirectory()));
-					}
-				});
+				final File[] alljar= name.listFiles(new AuditFileFilter(this.recurs_));
 				if (alljar.length!=0)
 				{
 					doAll(alljar);
@@ -642,14 +630,14 @@ public class Audit
 	{
 		if (!"".equals(xslt_))
 		{
-			URL u=null;
+			URL u = null;
 			try
 			{
-				u=new URL(xslt_);
+				u = new URL(xslt_);
 			}
 			catch (MalformedURLException e)
 			{
-				u=new File(xslt_).getCanonicalFile().toURI().toURL();
+				u = new File(xslt_).getCanonicalFile().toURI().toURL();
 			}
 			if (u.toExternalForm().equals(DEFAULT_STYLE_SHEET ))
 			{
@@ -936,7 +924,6 @@ public class Audit
 					detectAnnotations_.put(convJavaName(t),t);
 				}
 			}
-
 			parseNode(ignoreParams,environnement,"/audit/packages/package",ignorePackageName_);
 			parseNode(ignoreParams,environnement,"/audit/filenames/filename",ignoreName_);
 			parseNode(ignoreParams,environnement,"/audit/basenames/basename",ignoreBaseName_);
@@ -1104,7 +1091,7 @@ public class Audit
 		try
 		{
 			log.setLevel(Level.SEVERE);
-			ParamsConfig config=parseArgs(args);
+			ParamsConfig config = parseArgs(args);
 			if (config==null) return 0;
 			Audit audit=new Audit(config);
 			audit.doAll(config.getNames().toArray(new File[config.getNames().size()]));
