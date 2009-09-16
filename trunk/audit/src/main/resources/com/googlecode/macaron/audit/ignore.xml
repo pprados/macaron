@@ -59,6 +59,7 @@
 	<basenames>
 		<basename name="META-INF/NOTICE"/>
 		<basename name="META-INF/LICENSE"/>
+		<basename name="META-INF/services/javax.xml.parsers"/>
 	</basenames>
 
 </audit>

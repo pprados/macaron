@@ -102,13 +102,13 @@ public class Audit
 		String ext;
 		String basename;
 		String codebase;
-		public boolean equals(Object x)
-		{
-			return idName.equals(((Context)x).idName);
-		}
-		public int hashCode()
+		public int hashCode() // TODO: hash ?
 		{
 			return idName.hashCode();
+		}
+		public String toString()
+		{
+			return idName+"!"+path;
 		}
 		Context(Context ctx)
 		{
@@ -292,7 +292,14 @@ public class Audit
 					contexts=new HashSet<Context>();
 					packageName_.put(ctx.packageName, contexts);
 				}
-				contexts.add(ctx);
+				boolean find=false;
+				for (Context ctx2:contexts)
+					if (ctx2.idName.equals(ctx.idName))
+					{
+						find=true;
+						break;
+					}
+				if (!find)	contexts.add(ctx);
 			}
 	
 			// Analyze fullnames
@@ -808,7 +815,8 @@ public class Audit
 	private void writeXMLBasenameReport(PrintWriter out)
 	{
 		out.println("\n\t<!-- Same basename with different extensions in same package. -->");
-		writeXMLPartialReport(out,"basename",baseName_,ignoreBaseName_,2,Scope.jar);
+		writeXMLPartialReport(out,"basename",baseName_,ignoreBaseName_,2,Scope.clazz);
+		
 	}
 
 	/**
@@ -1094,6 +1102,7 @@ public class Audit
 			ParamsConfig config = parseArgs(args);
 			if (config==null) return 0;
 			Audit audit=new Audit(config);
+			audit.init();
 			audit.doAll(config.getNames().toArray(new File[config.getNames().size()]));
 			audit.writeXMLReport();
 			return 0;
