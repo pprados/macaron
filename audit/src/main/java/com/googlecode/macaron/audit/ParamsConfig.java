@@ -9,83 +9,111 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Philippe PRADOS
  * @author Romain PELISSE <belaran@gmail.com>
- *
  */
-public class ParamsConfig {
+public class ParamsConfig
+{
 
-	private	boolean recurs=false;
-	private	URL ignore;
-	private List<File> names=new ArrayList<File>();
-	private File output=new File("-");
-	private final String envXslt=System.getenv("AUDIT_XSLT");
-	private String xslt=(envXslt!=null) ? envXslt :	Audit.DEFAULT_STYLE_SHEET;
+	private boolean recurs = false;
+
+	private URL ignore;
+
+	private List<File> names = new ArrayList<File>();
+
+	private File output = new File("-");
+
+	private final String envXslt = System.getenv("AUDIT_XSLT");
+
+	private String xslt = (envXslt != null) ? envXslt
+			: Audit.DEFAULT_STYLE_SHEET;
+
 	/**
 	 * @return the recurs
 	 */
-	public boolean isRecurs() {
+	public boolean isRecurs()
+	{
 		return recurs;
 	}
+
 	/**
 	 * @param recurs the recurs to set
 	 */
-	public void setRecurs(boolean recurs) {
+	public void setRecurs(boolean recurs)
+	{
 		this.recurs = recurs;
 	}
+
 	/**
 	 * @return the ignore
 	 */
-	public URL getIgnore() {
+	public URL getIgnore()
+	{
 		return ignore;
 	}
+
 	/**
 	 * @param ignore the ignore to set
 	 */
-	public void setIgnore(URL ignore) {
+	public void setIgnore(URL ignore)
+	{
 		this.ignore = ignore;
 	}
+
 	/**
 	 * @return the names
 	 */
-	public List<File> getNames() {
+	public List<File> getNames()
+	{
 		return names;
 	}
+
 	/**
 	 * @param names the names to set
 	 */
-	public void setNames(List<File> names) {
+	public void setNames(List<File> names)
+	{
 		this.names = names;
 	}
+
 	/**
 	 * @return the output
 	 */
-	public File getOutput() {
+	public File getOutput()
+	{
 		return output;
 	}
+
 	/**
 	 * @param output the output to set
 	 */
-	public void setOutput(File output) {
+	public void setOutput(File output)
+	{
 		this.output = output;
 	}
+
 	/**
 	 * @return the xslt
 	 */
-	public String getXslt() {
+	public String getXslt()
+	{
 		return xslt;
 	}
+
 	/**
 	 * @param xslt the xslt to set
 	 */
-	public void setXslt(String xslt) {
+	public void setXslt(String xslt)
+	{
 		this.xslt = xslt;
 	}
+
 	/**
 	 * @return the envXslt
 	 */
-	public String getEnvXslt() {
+	public String getEnvXslt()
+	{
 		return envXslt;
 	}
 
-	
 }
