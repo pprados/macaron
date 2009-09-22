@@ -18,13 +18,13 @@
             <pathelement location="${target}/audit-1.0.jar" />
         </path>
     
-        <taskdef name="audit" classname="com.googlecode.macaron.audit.ant.AuditTask">
+        <taskdef name="macaron-audit" classname="com.googlecode.macaron.audit.ant.AuditTask">
             <classpath refid="macaron.classpath" />
         </taskdef>
         
-        <audit output="${target.test.ant}/audit.xml" recursive="true">
+        <macaron-audit output="${target.test.ant}/audit.xml" recursive="true">
             <target name="${target.classes}"/>
-        </audit>
+        </macaron-audit>
         
     </target>
 </project>

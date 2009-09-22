@@ -22,7 +22,7 @@
 	<groupId>com.googlecode.macaron</groupId>
 	<artifactId>seal</artifactId>
 	<name>seal</name>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<description>Tools to seal jar, war, ear and rar.</description>
 	<url>${url.home}/${project.name}</url>
 

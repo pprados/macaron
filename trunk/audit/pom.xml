@@ -22,14 +22,14 @@
 	<groupId>com.googlecode.macaron</groupId>
 	<artifactId>audit</artifactId>
 	<name>audit</name>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<description>Tools to audit JavaEE components and detect backdoors.</description>
 	<url>${url.home}/${project.name}</url>
 
 	<parent>
 		<artifactId>macaron</artifactId>
 		<groupId>com.googlecode.macaron</groupId>
-		<version>1.0</version>
+		<version>1.0.1</version>
 	</parent>
 
 	<scm>

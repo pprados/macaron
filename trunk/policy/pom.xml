@@ -22,7 +22,7 @@
 	<groupId>com.googlecode.macaron</groupId>
 	<artifactId>policy</artifactId>
 	<name>policy</name>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<description>Tools to extract policies from jar, war, ear and rar.</description>
 	<url>${url.home}/${project.name}</url>
 

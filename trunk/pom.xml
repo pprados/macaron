@@ -26,7 +26,7 @@
 	<artifactId>macaron</artifactId>
 	<packaging>pom</packaging>
 	<name>macaron</name>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<description>
 		A collection of tools to manage and detect back door in JavaEE component.
 	</description>
@@ -365,25 +365,24 @@
 		</plugins>
 	</reporting>
 
+	<dependencies>
+		<dependency>
+			<groupId>ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+	</dependencies>
+
 	<properties>
 		<server.id>www.prados.eu</server.id>
 		<srv.base>${server.id}/home/philippe/www</srv.base>
 		<project.build.assembly>src/main/assembly</project.build.assembly>
-		<current.version>1.0</current.version>
+		<current.version>1.0.1</current.version>
 		<url.home>http://macaron.googlecode.com</url.home>
 		<scp.home>scp://${srv.base}/mvn</scp.home>
 		<repo.home>scp://${srv.base}/mvn/repository</repo.home>
 
 		<checkstyle.url>http://www.prados.eu/mvn/checkstyle-pprados.xml</checkstyle.url>
 	</properties>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant-apache-resolver</artifactId>
-			<version>1.7.1</version>
-		</dependency>	
-	</dependencies>
-
 
 </project>
