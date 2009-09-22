@@ -293,8 +293,8 @@ public class Audit
 					packageName_.put(ctx.packageName, contexts);
 				}
 				boolean find=false;
-				for (Context ctx2:contexts)
-					if (ctx2.idName.equals(ctx.idName))
+				for (Context aCtx:contexts)
+					if (aCtx.idName.equals(ctx.idName))
 					{
 						find=true;
 						break;

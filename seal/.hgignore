@@ -1,0 +1,8 @@
+CVS/*
+.svn
+.project
+target/*
+.pmd
+.~lock*#
+
+
