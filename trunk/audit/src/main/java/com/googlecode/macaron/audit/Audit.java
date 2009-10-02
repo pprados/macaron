@@ -449,20 +449,28 @@ public class Audit
 				{
 					// Extraire l'archive
 					String basename=entry.getName().substring(entry.getName().lastIndexOf('/')+1);
-					File jarfile=new File(TEMP+File.separator+new File(jarFile.getName()).getName()+"-"+basename);
-					try
+					String ext=basename.substring(basename.lastIndexOf('.'));
+					if (!".jar".equalsIgnoreCase(ext) && !".zip".equalsIgnoreCase(ext))
 					{
-						OutputStream out=new FileOutputStream(jarfile);
-						InputStream in=jarFile.getInputStream(entry);
-						copyStream(in,out);
-						in.close();
-						out.close();
-						// Audit de l'archive
-						doJar(idName+"!"+entry.getName(),entry.getName().substring(len),jarfile);
+						log.warning("Invalide file "+idName+"!"+entry.getName());
 					}
-					finally
+					else
 					{
-						jarfile.delete();
+						File jarfile=new File(TEMP+File.separator+new File(jarFile.getName()).getName()+"-"+basename);
+						try
+						{
+							OutputStream out=new FileOutputStream(jarfile);
+							InputStream in=jarFile.getInputStream(entry);
+							copyStream(in,out);
+							in.close();
+							out.close();
+							// Audit de l'archive
+							doJar(idName+"!"+entry.getName(),entry.getName().substring(len),jarfile);
+						}
+						finally
+						{
+							jarfile.delete();
+						}
 					}
 				}
 				else if (entry.getName().startsWith("WEB-INF/classes/"))
