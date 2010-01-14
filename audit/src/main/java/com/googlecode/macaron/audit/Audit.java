@@ -257,7 +257,7 @@ public class Audit
 	}
 
 	/**
-	 * Analyse zip file.
+	 * Analyse file (from zip or not).
 	 * @param idName The identity name.
 	 * @param baseIdName The base identity name.
 	 * @param path The path of component.
@@ -270,7 +270,7 @@ public class Audit
 		try
 		{
 			final Context ctx=new Context();
-			if (log.isLoggable(Level.FINEST)) log.fine("analyseZipFile("+idName+","+baseIdName+","+path+")");
+			if (log.isLoggable(Level.FINEST)) log.fine("analyseFile("+idName+","+baseIdName+","+path+")");
 			int idx=path.lastIndexOf('/');
 			ctx.idName=idName;
 			ctx.baseIdName=baseIdName;
@@ -279,7 +279,7 @@ public class Audit
 			ctx.name=(idx==-1) ? path : path.substring(idx+1);
 			idx=ctx.name.lastIndexOf('.');
 			ctx.basename=ctx.packageName+((idx==-1) ? ctx.name : ctx.name.substring(0,ctx.name.lastIndexOf('.')));
-			ctx.ext=(idx==-1) ? "" : ctx.name.substring(idx);
+			ctx.ext=(idx==-1) ? "" : ctx.name.substring(idx+1);
 			if (excludePattern.matcher(ctx.name).matches()) return;
 	
 			Set<Context> contexts;
@@ -600,7 +600,16 @@ public class Audit
 			else if (name.getName().endsWith(".class"))
 			{
 				InputStream in=new FileInputStream(name);
-				auditFile(name.getName(), name.getName(), name.getName(),in,name.length());
+				String classes="";
+				String idname=name.getPath();
+				int idx=idname.lastIndexOf("classes");
+				if (idx!=-1)
+				{
+					classes=idname.substring(0,idx+"classes".length()+1);
+					idname=idname.substring(idx+"classes".length()+1);
+				}
+
+				auditFile(classes, classes, idname,in,name.length());
 			}
 			else
 			{
